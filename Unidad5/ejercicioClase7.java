@@ -15,20 +15,18 @@ public class ejercicioClase7 {
 
         int[] t = {2,67,12,41,22,2,41};
         int[] tUnico = new int[t.length];
+        int[] pos = {};
 
         Arrays.sort(t);
         System.out.println(Arrays.toString(t));
 
         for (int i = 0; i < t.length; i++) {
-            if (t[i] != t[i+1]) {
-                tUnico[i] = t[i];
-                i--;
-            }
-            else {
-                i++;
-            }
-        i++;
+            pos[i] = Arrays.binarySearch(t, t[i]);
+
+
         }
+
+
 
         System.out.println(Arrays.toString(tUnico));
 
