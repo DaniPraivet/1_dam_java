@@ -36,23 +36,14 @@ public class ejercicioClase8 {
             }
         }
 
+        pares = Arrays.copyOf(pares, posPares); // Copio desde el principio del array hasta el contador de número de ceros.
+        impares = Arrays.copyOfRange(impares,0, posImpares);
+
+        // Ordenamos los arrays
         Arrays.sort(pares);
         Arrays.sort(impares);
-        int posNewPares = 0;
-        int posNewImpares = 0;
-        int[] newPares = new int[pares.length]; // Hago un array para que copie todos los valores menos los que sean 0
-        for (int i = pares.length-1; i < 0; i--) {
-            if (pares[i] != 0) {
-                newPares[posNewPares] = pares[i];
-                posNewPares++;
-            }
-        }
-        int[] newImpares = new int[impares.length]; // Hago un array para que copie todos los valores menos los que sean 0
-        for (int i = impares.length-1; i < 0; i--) {
-            if (impares[i] != 0) {
-                newImpares[posNewImpares] = impares[i];
-            }
-        }
+
+        // Mostramos los resultados
         System.out.println(Arrays.toString(numeros));
         System.out.println(Arrays.toString(pares));
         System.out.println(Arrays.toString(impares));
