@@ -20,24 +20,41 @@ public class ejercicioClase15 {
         // elección de lugar de la doma
         int[] dama = new int[2];
 
+        rellenarTablero(tablero);
 
+        posicionDama(dama, tablero);
+
+        patronesDama(dama, tablero);
+
+        // A printear el tablero coño
+        for (char[] chars : tablero) {
+            System.out.println(Arrays.toString(chars));
+        }
+
+    }
+
+
+    public static void rellenarTablero(char[][] tablero) {
         for (int i = 0; i < tablero.length ; i++) {
             for (int j = 0; j < tablero[i].length ; j++) {
                 if ((i + j) % 2 == 0) {
-                    tablero[i][j] = '\u25A0';
+                    tablero[i][j] = '■';
                 } else {
-                    tablero[i][j] = '\u25A1';
+                    tablero[i][j] = '□';
                 }
             }
             System.out.println();
         }
+    }
 
+    public static void posicionDama(int[] dama, char[][] tablero) {
         for (int i = 0; i < dama.length; i++) {
             dama[i] = (int) (Math.random() * tablero.length);
         }
         tablero[dama[0]][dama[1]] =  '۩';
+    }
 
-        // Patrones de la dama
+    public static void patronesDama(int[] dama, char[][] tablero) {
         // Patrones verticales y horizontales
         for (int i = 0; i < tablero.length ; i++) {
             for (int j = 0; j < tablero[i].length ; j++) {
@@ -49,18 +66,32 @@ public class ejercicioClase15 {
                 }
             }
         }
+
+
         // Patrones diagonales
+        int fila = dama[0];
+        int columna = dama[1];
 
-
-        // Hacemos print del tablero
-        for (int i = 0; i < tablero.length; i++) {
-            System.out.println(Arrays.toString(tablero[i]));
+        // arriba-izquierda
+        for (int i = fila - 1, j = columna - 1; i >= 0 && j >= 0; i--, j--) {
+            tablero[i][j] = 'x';
         }
 
+        // arriba-derecha
+        for (int i = fila - 1, j = columna + 1; i >= 0 && j < tablero.length; i--, j++) {
+            tablero[i][j] = 'x';
+        }
 
+        // abajo-izquierda
+        for (int i = fila + 1, j = columna - 1; i < tablero.length && j >= 0; i++, j--) {
+            tablero[i][j] = 'x';
+        }
 
-
-
-
+        // abajo-derecha
+        for (int i = fila + 1, j = columna + 1; i < tablero.length && j < tablero.length; i++, j++) {
+            tablero[i][j] = 'x';
+        }
     }
+
+
 }
