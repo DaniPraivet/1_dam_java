@@ -13,16 +13,16 @@ public class ejercicioClase4 {
         String contrasena = sc.nextLine();
 
         System.out.println(ConsoleUtils.CYAN_BOLD + "¿Quieres jugar la primera versión o la segunda?" + ConsoleUtils.RESET);
-        int modo_juego = sc.nextInt();
-        sc.nextLine(); // para evitar errores (al tener otro sc.nextLine al parecer obtiene un "ENTER" / "\n")
+        int modoJuego = sc.nextInt();
 
-        switch (modo_juego) {
+
+        switch (modoJuego) {
             case 1:
-                jugarVersion1(sc, contrasena);
+                version1(sc, contrasena);
                 break;
 
             case 2:
-                jugarVersion2(sc, contrasena);
+                version2(sc, contrasena);
                 break;
 
             default:
@@ -31,7 +31,7 @@ public class ejercicioClase4 {
         }
     }
 
-    private static void jugarVersion1(Scanner sc, String contrasena) {
+    private static void version1(Scanner sc, String contrasena) {
         System.out.println(ConsoleUtils.BLUE_BOLD + "Jugador 2: Intenta adivinar la contraseña." + ConsoleUtils.RESET);
         while (true) {
             System.out.println(ConsoleUtils.WHITE_BOLD + "Introduce tu palabra:" + ConsoleUtils.RESET);
@@ -39,7 +39,6 @@ public class ejercicioClase4 {
 
             if (intento.equals(contrasena)) {
                 System.out.println(ConsoleUtils.GREEN_BOLD + "Has acertado la contraseña." + ConsoleUtils.RESET);
-                break;
             } else if (intento.compareTo(contrasena) < 0) {
                 System.out.println(ConsoleUtils.YELLOW + "La contraseña es mayor." + ConsoleUtils.RESET);
             } else {
@@ -48,7 +47,7 @@ public class ejercicioClase4 {
         }
     }
 
-    private static void jugarVersion2(Scanner sc, String contrasena) {
+    private static void version2(Scanner sc, String contrasena) {
         System.out.println(ConsoleUtils.BLUE_BOLD + "Jugador 2: Intenta adivinar la contraseña." + ConsoleUtils.RESET);
         int longitud = contrasena.length();
         char[] pistas = new char[longitud];
@@ -66,6 +65,7 @@ public class ejercicioClase4 {
             }
 
             // actualizamos las pistas
+            // si esa palabra es = a la contraseña se actualiza el * por la letra acertada (solo si está en la misma posicion)
             for (int i = 0; i < longitud; i++) {
                 if (i < intento.length() && intento.charAt(i) == contrasena.charAt(i)) {
                     pistas[i] = contrasena.charAt(i);
