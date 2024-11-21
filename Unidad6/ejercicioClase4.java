@@ -8,7 +8,7 @@ public class ejercicioClase4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // El primer jugador introduce la contraseña
+        // el primer jugador introduce la contraseña
         System.out.println(ConsoleUtils.RED_BOLD + "Jugador 1: \nIntroduce tu contraseña:" + ConsoleUtils.RESET);
         String contrasena = sc.nextLine();
 
@@ -65,14 +65,14 @@ public class ejercicioClase4 {
                 break;
             }
 
-            // Actualizamos las pistas
+            // actualizamos las pistas
             for (int i = 0; i < longitud; i++) {
                 if (i < intento.length() && intento.charAt(i) == contrasena.charAt(i)) {
                     pistas[i] = contrasena.charAt(i);
                 }
             }
 
-            // Mostramos las pistas
+            // mnostramos las pistas
             System.out.println(ConsoleUtils.YELLOW_BOLD + "Pistas: " + ConsoleUtils.RESET + new String(pistas));
         }
     }
