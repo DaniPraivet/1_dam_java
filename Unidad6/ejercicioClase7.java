@@ -19,5 +19,13 @@ public class ejercicioClase7 {
 
         String prohibido = "aeiouáéíóúAEIOUÁÉÍÓÚ";
 
+        StringBuilder sinVocales = new StringBuilder();
+        for (char c : usuario.toCharArray()) {
+            if (prohibido.indexOf(c)==-1) {
+                sinVocales.append(c);
+            }
+        }
+
+        System.out.println(sinVocales);
     }
 }
