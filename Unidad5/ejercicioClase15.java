@@ -71,24 +71,25 @@ public class ejercicioClase15 {
         // Patrones diagonales
         int fila = dama[0];
         int columna = dama[1];
+        int damero = tablero.length;
 
         // arriba-izquierda
-        for (int i = fila - 1, j = columna - 1; i >= 0 && j >= 0; i--, j--) {
+        for (int i = fila - 1, j = columna - 1; i >= 0 && j >= 0; i--, j--) { // si i o j llegan a 0 se detiene
             tablero[i][j] = 'x';
         }
 
         // arriba-derecha
-        for (int i = fila - 1, j = columna + 1; i >= 0 && j < tablero.length; i--, j++) {
+        for (int i = fila - 1, j = columna + 1; i >= 0 && j < damero; i--, j++) { // si i llega a 0 o j llega a tablero.length-1 (7) se detiene
             tablero[i][j] = 'x';
         }
 
         // abajo-izquierda
-        for (int i = fila + 1, j = columna - 1; i < tablero.length && j >= 0; i++, j--) {
+        for (int i = fila + 1, j = columna - 1; i < damero && j >= 0; i++, j--) { // si i llega a 7 o j llega a 0 se detiene
             tablero[i][j] = 'x';
         }
 
         // abajo-derecha
-        for (int i = fila + 1, j = columna + 1; i < tablero.length && j < tablero.length; i++, j++) {
+        for (int i = fila + 1, j = columna + 1; i < damero && j < damero; i++, j++) { // si i o j llegan a 7 se detiene
             tablero[i][j] = 'x';
         }
     }
