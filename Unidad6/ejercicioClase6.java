@@ -31,7 +31,6 @@ public static void metodo2(String frase) {
         fraseInvertida.append(frase); // pasamos el contenido de frase a fraseInvertida
         fraseInvertida.reverse(); // le hacemos reverse
         System.out.println(fraseInvertida);
-
 }
 
 
