@@ -14,6 +14,7 @@ public class ejercicioClase4 {
 
         System.out.println(ConsoleUtils.CYAN_BOLD + "¿Quieres jugar la primera versión o la segunda?" + ConsoleUtils.RESET);
         int modoJuego = sc.nextInt();
+        sc.nextLine();
 
 
         switch (modoJuego) {
@@ -39,6 +40,7 @@ public class ejercicioClase4 {
 
             if (intento.equals(contrasena)) {
                 System.out.println(ConsoleUtils.GREEN_BOLD + "Has acertado la contraseña." + ConsoleUtils.RESET);
+                break; // Finaliza el programa
             } else if (intento.compareTo(contrasena) < 0) {
                 System.out.println(ConsoleUtils.YELLOW + "La contraseña es mayor." + ConsoleUtils.RESET);
             } else {
@@ -58,6 +60,7 @@ public class ejercicioClase4 {
         while (true) {
             System.out.println(ConsoleUtils.WHITE_BOLD + "Introduce tu palabra:" + ConsoleUtils.RESET);
             String intento = sc.nextLine();
+
 
             if (intento.equals(contrasena)) {
                 System.out.println(ConsoleUtils.GREEN_BOLD + "Has acertado la contraseña." + ConsoleUtils.RESET);

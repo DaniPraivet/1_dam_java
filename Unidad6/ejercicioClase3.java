@@ -9,7 +9,10 @@ public class ejercicioClase3 {
         caracteres.*/
 
         Scanner sc = new Scanner(System.in);
-        String[] frases = {"Hola buenas tardes", "Adios tio"};
+        String[] frases = new String[2];
+
+        frases[0] = sc.nextLine();
+        frases[1] = sc.nextLine();
 
 
         if (frases[0].length() > frases[1].length()) {

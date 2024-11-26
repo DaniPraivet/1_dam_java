@@ -22,11 +22,16 @@ public class ejercicioClase5 {
         // pedimos la frase al usuario
         Scanner sc = new Scanner(System.in);
         String frase = sc.nextLine();
+        int espacios = 0;
 
-        String fraseSinEspacios = frase.strip();
-
-        int nEspacios = frase.length() - fraseSinEspacios.length();
-        System.out.println("La frase introducida tenía : " + nEspacios + " espacios.");
+        //String fraseSinEspacios = frase.strip();
+        for (int i = 0; i < frase.length(); i++) {
+            if (frase.charAt(i) == ' ') {
+                espacios++;
+            }
+        }
+        //int nEspacios = frase.length() - fraseSinEspacios.length();
+        System.out.println("La frase introducida tenía : " + espacios + " espacios.");
 
     }
 }

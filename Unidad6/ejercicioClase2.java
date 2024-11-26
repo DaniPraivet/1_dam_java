@@ -24,7 +24,7 @@ public class ejercicioClase2 {
         int contador = 0;
         String usuario = "";
         String contrasena = "";
-        boolean inicio = false;
+        boolean inicio_sesion = false;
 
         while (contador < 3) {
             System.out.println("Dime tu nombre de usuario: ");
@@ -34,16 +34,16 @@ public class ejercicioClase2 {
 
             for (int i = 0; i < usuarios.length; i++) {
                 if (usuario.equals(usuarios[i]) && contrasena.equals(contrasenas[i])) {
-                    inicio = true;
+                    inicio_sesion = true;
                     contador = 3;
                     System.out.println("Has conseguido iniciar sesión correctamente.");
                 }
 
             }
 
-            if (!inicio) {
+            if (!inicio_sesion) {
                 contador++;
-                System.out.println("No has introducido correctamente el usuario/contraseña.");
+                System.out.println("No has introducido incorrectamente el usuario/contraseña.");
             }
         }
     }
