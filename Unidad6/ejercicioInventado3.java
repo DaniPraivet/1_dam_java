@@ -6,14 +6,14 @@ public class ejercicioInventado3 {
     public static void main(String[] args) {
         // tablero de ajedrez
         char[][] tablero = new char[8][8];
-        // elección de lugar de la doma
+        // elección de lugar del caballo
         int[] caballo = new int[2];
 
         rellenarTablero(tablero);
 
-        posicionDama(caballo, tablero);
+        posicionCaballo(caballo, tablero);
 
-        patronesDama(caballo, tablero);
+        patronesCaballo(caballo, tablero);
 
         // A printear el tablero coño
         for (char[] chars : tablero) {
@@ -36,33 +36,33 @@ public class ejercicioInventado3 {
         }
     }
 
-    public static void posicionDama(int[] caballo, char[][] tablero) {
+    public static void posicionCaballo(int[] caballo, char[][] tablero) {
         for (int i = 0; i < caballo.length; i++) {
             caballo[i] = (int) (Math.random() * tablero.length);
         }
         tablero[caballo[0]][caballo[1]] =  '♘';
     }
 
-    public static void patronesDama(int[] caballo, char[][] tablero) {
-        // patrones diagonales
+    public static void patronesCaballo(int[] caballo, char[][] tablero) {
+        int[][] movimientos = {
+                {-2, 1}, {-2, -1},
+                {-1, 2}, {-1, -2},
+                {1, 2}, {1, -2},
+                {2, 1}, {2, -1}
+        };
+
         int fila = caballo[0];
         int columna = caballo[1];
-        int damero = tablero.length;
-        int[] posiciones = new int[8];
 
-        posiciones[0] = fila-2;
-        posiciones[1] = columna++;
-        posiciones[2] = posiciones[0];
-        posiciones[3] = columna--;
-        posiciones[4] = fila--;
-        posiciones[5] = columna+2;
-        posiciones[6] = fila++;
-        posiciones[7] = columna-2;
 
-        for (int i = 0; i < posiciones.length; i++) {
-            tablero[posiciones[i]][i+1] = 'x';
-        }
-            System.out.println();
+        for (int[] movimiento : movimientos) {
+            int nuevaFila = fila + movimiento[0];
+            int nuevaColumna = columna + movimiento[1];
+
+            if (nuevaFila >= 0 && nuevaFila < tablero.length && nuevaColumna >= 0 && nuevaColumna < tablero[0].length) {
+                tablero[nuevaFila][nuevaColumna] = 'x';
+            }
         }
     }
+}
 
