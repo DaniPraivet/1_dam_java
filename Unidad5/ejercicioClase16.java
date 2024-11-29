@@ -30,9 +30,8 @@ public class ejercicioClase16 {
         comprobarLugares(mapa);
 
 
-
-        for (int i = 0; i < mapa.length ; i++) {
-            System.out.println(Arrays.toString(mapa[i]));
+        for (int[] ints : mapa) {
+            System.out.println(Arrays.toString(ints));
         }
     }
 
@@ -53,6 +52,80 @@ public class ejercicioClase16 {
     }
 
     public static void comprobarLugares(int[][] mapa) {
+        int[] inicio = buscarLugar(mapa, 3);
+        int[] destino = buscarLugar(mapa, 4);
 
+        // Comprobamos que existe inicio y destino.
+        if (inicio == null || destino == null) {
+            System.out.println("No se encontraron los lugares de inicio o destino.");
+            return;
+        }
+
+        boolean[][] visitados = new boolean[mapa.length][mapa[0].length];
+
+        if (buscarCamino(mapa, inicio[0], inicio[1], destino[0], destino[1], visitados)) {
+            System.out.println("Se puede viajar.");
+        } else {
+            System.out.println("No se puede viajar.");
+        }
+    }
+
+    public static boolean buscarCamino(int[][] mapa, int x, int y, int destX, int destY, boolean[][] visitados) {
+        // Verificamos si no se sale del array y que cumple esas condiciones.
+        if (x < 0 || y < 0 || x >= mapa.length || y >= mapa[0].length || visitados[x][y] || mapa[x][y] == 0) {
+            return false;
+        }
+
+        // Si llegamos al destino, no cambiamos el 4.
+        if (x == destX && y == destY) {
+            return true;
+        }
+
+        // Marcar como visitado.
+        visitados[x][y] = true;
+
+        // Si no es el punto de inicio, marcamos el camino como 2.
+        if (mapa[x][y] != 3) {
+            mapa[x][y] = 2;
+        }
+
+        // Comprobar las 8 direcciones.
+        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+
+        for (int[] direction : directions) {
+            if (buscarCamino(mapa, x + direction[0], y + direction[1], destX, destY, visitados)) return true;
+        }
+
+        /* Mismo que el for pero con if.
+        if (buscarCamino(mapa, x - 1, y, destX, destY, visitados) ||
+                buscarCamino(mapa, x + 1, y, destX, destY, visitados) ||
+                buscarCamino(mapa, x, y - 1, destX, destY, visitados) ||
+                buscarCamino(mapa, x, y + 1, destX, destY, visitados) ||
+                buscarCamino(mapa, x - 1, y - 1, destX, destY, visitados) ||
+                buscarCamino(mapa, x - 1, y + 1, destX, destY, visitados) ||
+                buscarCamino(mapa, x + 1, y - 1, destX, destY, visitados) ||
+                buscarCamino(mapa, x + 1, y + 1, destX, destY, visitados)) {
+            return true;
+        }*/
+
+        // Si no es parte del camino, convertimos el 2 a 1.
+        if (mapa[x][y] != 3) {
+            mapa[x][y] = 1;
+        }
+
+        return false;
+    }
+
+
+
+    public static int[] buscarLugar(int[][] mapa, int valor) {
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[i].length; j++) {
+                if (mapa[i][j] == valor) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
     }
 }
