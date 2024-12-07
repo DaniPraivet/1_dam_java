@@ -44,7 +44,7 @@ public class CuentaCorriente {
             System.out.println("Introduce el nombre del titular de la cuenta: ");
             nombre = scanner.nextLine();
 
-            System.out.println("Introduce");
+            System.out.println("Introduca su DNI: ");
             dni = scanner.nextLine();
 
             if (nombre.isEmpty() || dni.isEmpty()) {
@@ -57,5 +57,27 @@ public class CuentaCorriente {
         }
 
         return new CuentaCorriente(dni, nombre, 0, idCuenta);
+    }
+
+    public boolean retirarDinero(double cantidad) {
+        if (cantidad<=0) {
+            return false;
+        }
+        if (cantidad > saldo) {
+            System.out.println("Saldo insuficiente para realizar esta operación.");
+            return false;
+        }
+        saldo -= cantidad;
+        System.out.println("Has retirado " + cantidad + "€ y actualmente tienes " + saldo + "€.");
+        return true;
+    }
+
+    public boolean ingresarDinero(double cantidad) {
+        if (cantidad <= 0) {
+            System.out.println("La cantidad debe ser positiva.");
+        }
+        saldo += cantidad;
+        System.out.println("Has ingresado " + cantidad + "€ y actualmente tienes " + saldo + "€.");
+        return true;
     }
 }
