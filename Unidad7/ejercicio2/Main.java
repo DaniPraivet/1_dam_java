@@ -1,4 +1,6 @@
-package Unidad7.ejercicio1;
+package Unidad7.ejercicio2;
+
+import Unidad7.ejercicio1.CuentaCorriente;
 
 import java.util.Scanner;
 

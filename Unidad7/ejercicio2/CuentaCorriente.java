@@ -1,22 +1,15 @@
-package Unidad7.ejercicio1;
+package Unidad7.ejercicio2;
 
 /*
-Diseñar la clase CuentaCorriente, que almacena los datos:
-DNI
-Nombre del titular
-Saldo
+En la clase CuentaCorriente sobrecarga los constructores
+para poder crear objetos:
 
-Las operaciones típicas con una cuenta corriente son:
+Con el DNI del titular de la cuenta y un saldo inicial
 
-Crear una cuenta: se necesita sí o sí el DNI y el nombre del titular. El
-saldo inicial se inicializará por defecto a 0.
+Con el DNI, nombre y el saldo inicial.
 
-Sacar dinero: El metodo debe indicar si ha sido posible llevar a cabo la
-operación.
-
-Ingresar dinero: se incremente el saldo
-
-Mostrar información: Se muestra la información de la cuenta.
+Escribe un programa que compruebe el funcionamiento de
+estos métodos.
  */
 
 import java.util.Scanner;
@@ -27,14 +20,14 @@ public class CuentaCorriente {
     public double saldo;
     public int idCuenta = 0;
 
-    protected CuentaCorriente(String dni, String nombre, double saldo, int idCuenta) {
+    public CuentaCorriente(String dni, String nombre, double saldo, int idCuenta) {
         this.dni = dni;
         this.nombre = nombre;
         this.saldo = saldo;
         this.idCuenta = idCuenta;
     }
 
-    protected static CuentaCorriente crearCuenta(int idCuenta) {
+    public static CuentaCorriente crearCuenta(int idCuenta) {
         Scanner scanner = new Scanner(System.in);
 
         String nombre;
@@ -59,7 +52,7 @@ public class CuentaCorriente {
         return new CuentaCorriente(dni, nombre, 0, idCuenta);
     }
 
-    protected boolean retirarDinero(double cantidad) {
+    public boolean retirarDinero(double cantidad) {
         if (cantidad<=0) {
             return false;
         }
@@ -72,7 +65,7 @@ public class CuentaCorriente {
         return true;
     }
 
-    protected boolean ingresarDinero(double cantidad) {
+    public boolean ingresarDinero(double cantidad) {
         if (cantidad <= 0) {
             System.out.println("La cantidad debe ser positiva.");
         }
