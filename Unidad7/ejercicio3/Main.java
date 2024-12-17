@@ -4,6 +4,8 @@ import Unidad7.ejercicio1.CuentaCorriente;
 
 import java.util.Scanner;
 
+import Utils.*;
+
 /*
 Diseñar la clase Alumno que deberá tener los siguientes parámetros:
 String con Nombre
@@ -30,20 +32,20 @@ public class Main {
 
         while (opcion != 0) {
             System.out.println("Bienvenido al banco, ¿qué desea hacer hoy?");
-            System.out.println("\t1. Crear una aula");
-            System.out.println("\t2. Añadir alumno en x clase");
+            System.out.println("\t1. Crear una aula (WIP)");
+            System.out.println("\t2. Añadir alumno en una clase (WIP)");
             System.out.println("\t3. Editar información clase (WIP)");
             System.out.println("\t4. Editar información alumno (WIP)");
-            System.out.println("\t5. Mostrar información clase");
-            System.out.println("\t6. Mostrar información alumno");
+            System.out.println("\t5. Mostrar información clase (WIP)");
+            System.out.println("\t6. Mostrar información alumno (WIP)");
             System.out.println("\t0. Salir");
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1 -> {
-
+                    Aula.crearAula();
                 }
                 case 2 -> {
-
+                    System.out.println("¿En cuál clase vas ha añadir el alumno? (Indica el nombre de la clase.)");
                 }
                 case 3 -> {
 
@@ -51,6 +53,8 @@ public class Main {
                 case 4 -> {
 
                 }
+                case 5 -> {}
+                case 6 -> {}
                 case 0 -> System.out.println("Saliendo del programa. Nos vemos o/");
                 default -> throw new IllegalStateException("Valor no identificado: " + opcion);
 

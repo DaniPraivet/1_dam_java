@@ -22,19 +22,50 @@ Mostrar información: Se muestra la información de la cuenta.
 import java.util.Scanner;
 
 public class CuentaCorriente {
-    public String dni;
-    public String nombre;
-    public double saldo;
-    public int idCuenta = 0;
+    String dni;
+    String nombre;
+    double saldo = 0;
+    int idCuenta = 0;
 
-    protected CuentaCorriente(String dni, String nombre, double saldo, int idCuenta) {
+    protected CuentaCorriente(String dni, String nombre, int idCuenta) {
         this.dni = dni;
         this.nombre = nombre;
-        this.saldo = saldo;
         this.idCuenta = idCuenta;
     }
 
-    protected static CuentaCorriente crearCuenta(int idCuenta) {
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public int getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
+    public static CuentaCorriente crearCuenta(int idCuenta) {
         Scanner scanner = new Scanner(System.in);
 
         String nombre;
@@ -56,10 +87,10 @@ public class CuentaCorriente {
             scanner.close();
         }
 
-        return new CuentaCorriente(dni, nombre, 0, idCuenta);
+        return new CuentaCorriente(dni,nombre,idCuenta);
     }
 
-    protected boolean retirarDinero(double cantidad) {
+    public boolean retirarDinero(double cantidad) {
         if (cantidad<=0) {
             return false;
         }
@@ -72,12 +103,14 @@ public class CuentaCorriente {
         return true;
     }
 
-    protected boolean ingresarDinero(double cantidad) {
+    public boolean ingresarDinero(double cantidad) {
         if (cantidad <= 0) {
             System.out.println("La cantidad debe ser positiva.");
+            return false;
+        } else {
+            saldo += cantidad;
+            System.out.println("Has ingresado " + cantidad + "€ y actualmente tienes " + saldo + "€.");
+            return true;
         }
-        saldo += cantidad;
-        System.out.println("Has ingresado " + cantidad + "€ y actualmente tienes " + saldo + "€.");
-        return true;
     }
 }
