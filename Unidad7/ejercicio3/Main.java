@@ -1,7 +1,5 @@
 package Unidad7.ejercicio3;
 
-import Unidad7.ejercicio1.CuentaCorriente;
-
 import java.util.Scanner;
 
 import Utils.*;
@@ -30,35 +28,86 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int opcion = 1;
 
-        while (opcion != 0) {
-            System.out.println("Bienvenido al banco, ¿qué desea hacer hoy?");
-            System.out.println("\t1. Crear una aula (WIP)");
-            System.out.println("\t2. Añadir alumno en una clase (WIP)");
-            System.out.println("\t3. Editar información clase (WIP)");
-            System.out.println("\t4. Editar información alumno (WIP)");
-            System.out.println("\t5. Mostrar información clase (WIP)");
-            System.out.println("\t6. Mostrar información alumno (WIP)");
+        do {
+            System.out.println("Bienvenido al sistema de gestión de aulas, ¿qué desea hacer hoy?");
+            System.out.println("\t1. Crear una aula");
+            System.out.println("\t2. Añadir alumno en una clase");
+            System.out.println("\t3. Cambiar el estado de un aula");
+            System.out.println("\t4. Mostrar información de un aula");
             System.out.println("\t0. Salir");
             opcion = sc.nextInt();
+            sc.nextLine();
+
             switch (opcion) {
                 case 1 -> {
-                    Aula.crearAula();
+                    if (siguienteCuenta < instituto.length) {
+                        System.out.println("Dime el nombre de la nueva aula:");
+                        String nombre = sc.nextLine();
+
+                        System.out.println("Dime la cantidad máxima de alumnos en el aula:");
+                        int maxAlumnos = sc.nextInt();
+                        sc.nextLine();
+
+                        if (maxAlumnos > 0 && !nombre.isEmpty()) {
+                            instituto[siguienteCuenta] = new Aula(maxAlumnos, nombre);
+                            siguienteCuenta++;
+                        } else {
+                            System.out.println("Datos inválidos para crear el aula.");
+                        }
+                    } else {
+                        System.out.println("No se pueden crear más aulas.");
+                    }
                 }
                 case 2 -> {
-                    System.out.println("¿En cuál clase vas ha añadir el alumno? (Indica el nombre de la clase.)");
+                    System.out.println("¿En cuál clase deseas añadir el alumno? (Introduce el índice del aula)");
+                    int indice = sc.nextInt();
+                    sc.nextLine();
+                    if (indice >= 0 && indice < siguienteCuenta) {
+                        System.out.println("Dime el nombre del nuevo alumn@:");
+                        String nombre = sc.nextLine();
+
+                        System.out.println("Dime la edad del nuevo alumn@:");
+                        int edad = sc.nextInt();
+
+                        System.out.println("Dime la calificación del nuevo alumn@:");
+                        double calificacion = sc.nextDouble();
+                        sc.nextLine();
+
+                        if (!nombre.isEmpty() && edad > 0 && calificacion >= 0 && calificacion <= 10) {
+                            Alumno nuevoAlumno = new Alumno(nombre, edad, calificacion, instituto[indice].getAula().length);
+                            instituto[indice].añadirAlumno(nuevoAlumno);
+                        } else {
+                            System.out.println("Datos inválidos para el alumno.");
+                        }
+                    } else {
+                        System.out.println("Índice no válido.");
+                    }
                 }
                 case 3 -> {
-
+                    System.out.println("¿En cuál clase deseas cambiar el estado? (Introduce el índice del aula)");
+                    int indice = sc.nextInt();
+                    sc.nextLine();
+                    if (indice >= 0 && indice < siguienteCuenta) {
+                        instituto[indice].cambiarEstado();
+                    } else {
+                        System.out.println("Índice no válido.");
+                    }
                 }
                 case 4 -> {
-
+                    System.out.println("¿De cuál aula deseas mostrar la información? (Introduce el índice del aula)");
+                    int indice = sc.nextInt();
+                    sc.nextLine();
+                    if (indice >= 0 && indice < siguienteCuenta) {
+                        instituto[indice].mostrarInformacion();
+                    } else {
+                        System.out.println("Índice no válido.");
+                    }
                 }
-                case 5 -> {}
-                case 6 -> {}
                 case 0 -> System.out.println("Saliendo del programa. Nos vemos o/");
-                default -> throw new IllegalStateException("Valor no identificado: " + opcion);
-
+                default -> System.out.println("Opción no válida.");
             }
-        }
+        } while (opcion != 0);
+
+        sc.close();
     }
 }
