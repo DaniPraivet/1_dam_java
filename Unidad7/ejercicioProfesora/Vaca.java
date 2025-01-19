@@ -17,11 +17,14 @@ public class Vaca {
         this.nombre = nombre;
     }
 
-    public String getProducto() {
-        return producto;
-    }
 
-    public void setProducto(String producto) {
-        this.producto = producto;
+    @Override
+    public String toString() {
+        return "Vaca{" +
+                "nombre='" + nombre + '\'' +
+                ", producto=" + producto +
+                '}';
     }
 }
+
+

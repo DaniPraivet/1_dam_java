@@ -19,25 +19,9 @@ public class Granja {
         this.nombre = nombre;
     }
 
-    public Cerdo[] getCerdos() {
-        return cerdos;
-    }
-
-    public void setCerdos(Cerdo[] cerdos) {
-        this.cerdos = cerdos;
-    }
-
-    public Vaca[] getVacas() {
-        return vacas;
-    }
-
-    public void setVacas(Vaca[] vacas) {
-        this.vacas = vacas;
-    }
 
     public double litrosRecogidosAlDia (Vaca[] vacas) {
-        double produccionVacaLechera = 0;
-        produccionVacaLechera = (34.5*305)/365;
+        double produccionVacaLechera = (34.5*305)/365;
         double litrosPorDia = 0;
         for (Vaca vaca : vacas) {
             if (vaca.producto.equalsIgnoreCase("leche")) {
@@ -47,7 +31,12 @@ public class Granja {
         return litrosPorDia;
     }
 
-    public void mostrarInformacionAnimales () {
-
+    public void mostrarInformacionAnimales ( Cerdo[] cerdos, Vaca[] vacas) {
+        for (Cerdo cerdo : cerdos) {
+            System.out.println(cerdo.toString());
+        }
+        for (Vaca vaca : vacas) {
+            System.out.println(vaca.toString());
+        }
     }
 }

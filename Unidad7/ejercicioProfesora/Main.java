@@ -26,6 +26,17 @@ la granja
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Cerdo cerdo1 = new Cerdo(1,"Meishan", false);
+        Cerdo cerdo2 = new Cerdo(2,"Erhualian", true);
+        Cerdo cerdo3 = new Cerdo(3,"Jiaxing Negro", true);
+        Cerdo cerdo4 = new Cerdo(4,"Fengjing", false);
+        Vaca vaca1 = new Vaca("Lola","leche");
+        Vaca vaca2 = new Vaca("Mercedes","carne");
+        Vaca vaca3 = new Vaca("Vicky", "leche");
+        Vaca vaca4 = new Vaca("Antonia", "leche");
+        Vaca[] vaquitas = {vaca1, vaca2, vaca3, vaca4};
+        Cerdo[] cochinitos = {cerdo1, cerdo2, cerdo3, cerdo4};
+        Granja miGranja = new Granja("Paco", cochinitos, vaquitas);
         int opcion = 1;
         while (opcion != 0) {
             System.out.println("Titulo menu");
@@ -35,10 +46,11 @@ public class Main {
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1 -> {
+                    System.out.println("Se recogen al día: " + miGranja.litrosRecogidosAlDia(vaquitas) + " L.");
 
                 }
                 case 2 -> {
-
+                    miGranja.mostrarInformacionAnimales(cochinitos, vaquitas);
                 }
                 case 0 -> System.out.println("Saliendo del programa. Nos vemos o/");
                 default -> throw new IllegalStateException("Valor no identificado: " + opcion);
