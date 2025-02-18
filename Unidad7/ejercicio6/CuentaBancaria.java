@@ -59,6 +59,7 @@ public class CuentaBancaria {
     }
 
     public void asignarGestor(Gestor gestor) {
+
     }
 }
 
