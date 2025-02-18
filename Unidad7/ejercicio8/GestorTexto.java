@@ -25,7 +25,7 @@ public class GestorTexto {
                     miTexto.anadirCaracter(caracterUsuario, principio);
                 }
                 case 2 -> {
-                    System.out.println("¿Qué caracter quieres añadir a tu cadena?");
+                    System.out.println("¿Qué quieres que contenga la cadena que quieres añadir a tu cadena original?");
                     String cadenaUsuario = sc.nextLine();
                     System.out.println("¿Quieres añadirlo al principio? (1/0)");
                     boolean principio = sc.nextBoolean();
