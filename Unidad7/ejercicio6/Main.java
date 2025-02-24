@@ -36,6 +36,7 @@ public class Main {
             System.out.println("3. Consultar información de cuentas");
             System.out.println("4. Realizar depósito");
             System.out.println("5. Realizar retiro");
+            System.out.println("6. Crear una cuenta corriente con gestor");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
@@ -107,6 +108,27 @@ public class Main {
                     } else {
                         System.out.println("Índice inválido o cuenta no existente.");
                     }
+                }
+                case 6 -> {
+                    System.out.print("Ingrese el titular de la cuenta: ");
+                    String titular = sc.nextLine();
+                    System.out.print("Ingrese el saldo inicial: ");
+                    double saldo = sc.nextDouble();
+                    sc.nextLine();
+
+
+                    System.out.print("Ingrese el nombre del gestor: ");
+                    String titularGestor = sc.nextLine();
+                    System.out.println("Ingrese el telefono del gestor: ");
+                    String tlfGestor = sc.nextLine();
+                    System.out.println("Ingrese la cantidad máxima a operar (opcional): ");
+                    int cantidadGestor = sc.nextInt();
+                    Gestor gestor = new Gestor(titularGestor,tlfGestor,cantidadGestor);
+                    CuentaBancaria cuenta = new CuentaBancaria(titular, saldo, gestor);
+                    if (banco.agregarCuenta(cuenta)) {
+                        System.out.println("Cuenta creada con éxito.");
+                    }
+
                 }
                 case 0 -> System.out.println("Saliendo del programa. ¡Hasta pronto!");
                 default -> System.out.println("Opción no válida.");

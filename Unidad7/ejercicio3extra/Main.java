@@ -1,7 +1,5 @@
 package Unidad7.ejercicio3extra;
 
-import Utils.Switch;
-
 import java.util.Scanner;
 
 public class Main {

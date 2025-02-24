@@ -3,12 +3,18 @@ package Unidad7.ejercicio6;
 public class CuentaBancaria {
     private String titular;
     private double saldo;
-    private Gestor gestor; // Nuevo atributo para el gestor asociado
+    private Gestor gestor;
 
-    // Constructor predeterminado de CuentaBancaria
+    // Constructor predeterminado
     public CuentaBancaria(String titular, double saldoInicial) {
         this.titular = titular;
         this.saldo = saldoInicial;
+    }
+
+    public CuentaBancaria(String titular, double saldoInicial, Gestor gestor) {
+        this.titular = titular;
+        this.saldo = saldoInicial;
+        this.gestor = gestor;
     }
 
     public void depositar(double cantidad) {
@@ -59,7 +65,5 @@ public class CuentaBancaria {
     }
 
     public void asignarGestor(Gestor gestor) {
-
     }
 }
-

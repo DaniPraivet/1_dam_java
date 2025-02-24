@@ -33,6 +33,13 @@ public class Texto {
         }
     }
 
+    public Texto(int maxLongitud) {
+        this.cadena = "";
+        this.maxLongitud = maxLongitud;
+        this.fechaCreacion = LocalDateTime.now();
+        this.ultimaModificacion = fechaCreacion;
+    }
+
     public Texto(String cadena, int maxLongitud) {
         this.cadena = cadena;
         this.maxLongitud = maxLongitud;
@@ -59,7 +66,7 @@ public class Texto {
         System.out.println("Vocales minúsculas: " + minusculas);
     }
 
-    public Texto anadirCaracter(char caracter, boolean posicion) {
+    /*public Texto anadirCaracter(char caracter, boolean posicion) {
         // Verificar longitud maxima
         if (this.cadena.length() >= this.maxLongitud) {
             System.out.println("No se pueden añadir más caracteres. Has llegado al máximo de longitud establecido.");
@@ -77,9 +84,9 @@ public class Texto {
         this.ultimaModificacion = LocalDateTime.now();
 
         return this;
-    }
+    }*/
 
-    public Texto anadirCadena(String cadenaUsuario, boolean posicion) {
+    public Texto anadirTexto(String cadenaUsuario, boolean posicion) {
         // Verifica que no se haya alcanzado la longitud máxima
         if (this.cadena.length() + cadenaUsuario.length() > this.maxLongitud) {
             System.out.println("No se pueden añadir más caracteres. Has llegado al máximo de longitud establecido.");

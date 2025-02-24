@@ -17,6 +17,7 @@ class Alumno extends Persona {
         else return Curso.GRADO_UNIVERSITARIO;
     }
 
+    @Override
     public String toString() {
         return super.toString() + "\nCurso: " + curso + "\nHorario: " + (curso.ordinal() <= Curso.BACHILLERATO.ordinal() ? "Mañana" : "Tarde");
     }
