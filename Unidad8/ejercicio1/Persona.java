@@ -1,8 +1,6 @@
 package Unidad8.ejercicio1;
 
-enum Curso {
-    PREESCOLAR, PRIMARIA, SECUNDARIA, BACHILLERATO, GRADO_SUPERIOR, GRADO_UNIVERSITARIO
-}
+
 
 class Persona {
     public String nombre;
@@ -32,6 +30,4 @@ class Persona {
     public String toString() {
         return "\nNombre: " + nombre + "\nEdad: " + edad + "\nEstatura: " + estatura + "m";
     }
-
-
 }

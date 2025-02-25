@@ -8,7 +8,7 @@ public class Main {
         System.out.println("Edad actualizada: " + p1.getEdad());
 
         System.out.println();
-        Alumno a1 = new Alumno("Ana", 15, 1.60f);
+        Alumno a1 = new Alumno("Ana", 21, 1.60f);
         System.out.println(a1.toString());
     }
 }

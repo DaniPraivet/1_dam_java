@@ -7,14 +7,17 @@ class Alumno extends Persona {
         super(nombre, edad, estatura);
         this.curso = asignarCurso(edad);
     }
+    enum Curso {
+        PREESCOLAR, PRIMARIA, SECUNDARIA, BACHILLERATO, GRADO_SUPERIOR
+    }
 
     private Curso asignarCurso(int edad) {
-        if (edad >= 3 && edad <= 5) return Curso.PREESCOLAR;
-        else if (edad >= 6 && edad <= 11) return Curso.PRIMARIA;
-        else if (edad >= 12 && edad <= 16) return Curso.SECUNDARIA;
-        else if (edad >= 17 && edad <= 18) return Curso.BACHILLERATO;
-        else if (edad >= 19 && edad <= 22) return Curso.GRADO_SUPERIOR;
-        else return Curso.GRADO_UNIVERSITARIO;
+        if (edad <= 0 ) return null;
+        else if (edad <= 6) return Curso.PREESCOLAR;
+        else if (edad <= 12) return Curso.PRIMARIA;
+        else if (edad <= 16) return Curso.SECUNDARIA;
+        else if (edad < 18) return Curso.BACHILLERATO;
+        else return Curso.GRADO_SUPERIOR;
     }
 
     @Override
