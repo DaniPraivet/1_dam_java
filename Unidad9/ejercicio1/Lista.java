@@ -1,6 +1,5 @@
 package Unidad9.ejercicio1;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Lista {
@@ -8,6 +7,10 @@ public class Lista {
 
     public Lista() {
         this.lista = new int[0];
+    }
+
+    public Lista(int[] lista) {
+        this.lista = lista;
     }
 
     int obtenerNumerosElementos() {
@@ -19,11 +22,12 @@ public class Lista {
     }
 
     void insertarNumeroPrincipio(int numero) {
-        this.lista = Arrays.copyOf(this.lista, this.lista.length+1);
-        for (int i = this.lista.length-1; i >= 0; i--) {
-            this.lista[i+1] = this.lista[i];
+        int[] lista2 = Arrays.copyOf(this.lista, this.lista.length+1);
+        lista2[0] = numero;
+        for (int i = 1; i < lista2.length-1; i++) {
+            lista2[i] = this.lista[i];
         }
-        this.lista[0] = numero;
+        this.lista = lista2;
     }
 
     void insertarNumeroFinal(int numero) {
@@ -45,11 +49,11 @@ public class Lista {
         this.lista = nuevaLista;
     }
 
-    void insertarListaFinal(int[] listaAAnyadir) {
+    void insertarListaFinal(Lista listaParaAgregar) {
         int longitudArray = this.lista.length;
-        this.lista = Arrays.copyOf(this.lista, this.lista.length+listaAAnyadir.length);
-        for (int i = 0; i < listaAAnyadir.length; i++) {
-            this.lista[longitudArray+i] = listaAAnyadir[i];
+        this.lista = Arrays.copyOf(this.lista, this.lista.length+listaParaAgregar.lista.length);
+        for (int i = 0; i < listaParaAgregar.lista.length; i++) {
+            this.lista[longitudArray+i] = listaParaAgregar.lista[i];
         }
     }
 
