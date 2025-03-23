@@ -1,6 +1,6 @@
-package Unidad6.Examen;
+/*package Unidad6.Examen;
 
-import Utils.*;
+import Utils.ConsoleUtils;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class Main {
             System.out.println("\t2. Verificar si un número es capicúa");
             System.out.println("\t3. Determinar si un número es punto de silla de una matriz");
             System.out.println("\t4. Generar matriz identidad");
-            System.out.println("\t5. Salir");
+            System.out.println(ConsoleUtils.RED_BOLD +"\t5. Salir" + ConsoleUtils.RESET);
             System.out.println("\n");
             opcion = sc.nextInt();
 
@@ -37,7 +37,7 @@ public class Main {
                     System.out.println("Saliendo del programa");
                     break;
                 default:
-                    System.out.println("WARNING: Introduce los números del 1 al 5 gilipollas");
+                    System.out.println(ConsoleUtils.RED_BOLD + "WARNING: Introduce los números del 1 al 5 gilipollas" + ConsoleUtils.RESET);
                     break;
             }
         }
@@ -135,3 +135,4 @@ public class Main {
         }
     }
 }
+*/
