@@ -54,6 +54,7 @@ public class Agenda {
         }
     }
 
+    //TODO: Terminar en clase todo los métodos de abajooo
     public void mostrarContactos() {
         if (totalContactos == 0) {
             System.out.println("No hay contactos en la agenda.");

@@ -19,21 +19,22 @@ public class LanzadorAgenda {
             sc.nextLine();
 
             switch (opcion) {
-                case 1:
+                case 1 -> {
                     agenda.nuevoContacto(sc);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     agenda.buscarContacto(sc);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     agenda.mostrarContactos();
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     agenda.guardarContactos();
                     System.out.println("Agenda guardada. Saliendo...");
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Opción no válida.");
+                }
             }
         } while (opcion != 4);
 

@@ -6,7 +6,7 @@ public class ejercicio8 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String filePath = "Unidad10/archivos/";
-        String archivoACopiar = "";
+        String archivoACopiar;
         String linea;
         String texto = "";
 
