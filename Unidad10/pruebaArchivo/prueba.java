@@ -17,8 +17,10 @@ public class prueba {
             System.out.println("\t0. Salir");
             opcion = sc.nextInt();
 
+
             if (opcion == 1) {
                 System.out.println("¿Qué quieres escribir?");
+                sc.nextLine();
                 texto = sc.nextLine();
 
                 try(FileWriter w = new FileWriter(filePath)) {
