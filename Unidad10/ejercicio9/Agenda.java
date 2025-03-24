@@ -14,6 +14,13 @@ public class Agenda {
         cargarContactos();
     }
 
+    /**
+     * Comprobamos que no hayamos excedido la cantidad de contactos máxima en la agenda,
+     * luego le preguntamos al usuario el nombre del nuevo contacto, comprobamos que no
+     * se encuentre en ningún contacto de la agenda y luego preguntamos el teléfono, una
+     * vez introducido esos datos, creamos un nuevo objeto tipo Contacto.
+     * @param sc El scanner para que podamos pedir datos al usuario
+     */
     public void nuevoContacto(Scanner sc) {
         if (totalContactos >= MAX_CONTACTOS) {
             System.out.println("La agenda está llena.");
@@ -37,6 +44,12 @@ public class Agenda {
         System.out.println("Contacto agregado.");
     }
 
+    /**
+     * Le pedimos el nombre que queremos buscar al usuario, luego buscamos al usuario
+     * obteniendo el nombre de un contacto, sin importar que sea mayúscula o minúscula
+     * y que contenga lo que hemos buscado.
+     * @param sc El scanner para que podamos pedir datos al usuario
+     */
     public void buscarContacto(Scanner sc) {
         System.out.print("Buscar: ");
         String busqueda = sc.nextLine().toLowerCase();
@@ -54,7 +67,9 @@ public class Agenda {
         }
     }
 
-    //TODO: Terminar en clase todo los métodos de abajooo
+    /**
+     * Mostrar los contactos, ordenándolos por su nombre y luego los mostramos.
+     */
     public void mostrarContactos() {
         if (totalContactos == 0) {
             System.out.println("No hay contactos en la agenda.");
@@ -68,6 +83,10 @@ public class Agenda {
         }
     }
 
+    /**
+     * Antes de salir del código debemos de guardar los contactos bajo cierta sintaxis
+     * en este caso se separan por "," y por líneas distintas
+     */
     public void guardarContactos() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (int i = 0; i < totalContactos; i++) {
@@ -79,6 +98,11 @@ public class Agenda {
         }
     }
 
+    /**
+     * Al iniciar el programa, debemos cargar los contactos si teníamos anteriormente algún contacto
+     * para cargarlos, obtenemos los datos que están separados por ",", una vez hemos leído esos datos
+     * leemos la siguiente línea
+     */
     private void cargarContactos() {
         File archivo = new File(FILE_PATH);
         if (!archivo.exists()) return;
