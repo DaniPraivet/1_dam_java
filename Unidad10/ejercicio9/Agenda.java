@@ -99,6 +99,50 @@ public class Agenda {
     }
 
     /**
+     * Le pedimos al usuario buscar sobre los contactos actuales, le mostramos los resultados
+     * para que conozca el nombre exacto a introducir para luego eliminarlo, es decir
+     * sobreescribir los datos de la agenda.
+     * @param sc El scanner para que podamos pedir datos al usuario
+     */
+    public void borrarContantos(Scanner sc) {
+        System.out.print("Buscar contacto a eliminar: ");
+        String busqueda = sc.nextLine().toLowerCase();
+        boolean Noencontrado = true;
+        String contactoAEliminar = "";
+        if (Noencontrado) {
+            System.out.println("No se encontraron contactos.");
+
+            for (int i = 0; i < this.totalContactos; i++) {
+                if (this.contactos[i].getNombre().toLowerCase().contains(busqueda)) {
+                    System.out.println(this.contactos[i]);
+                }
+            }
+            if (!Noencontrado) {
+                System.out.println("No se han encontrado contactos.");
+                return;
+            }
+
+        }
+
+        System.out.println("Indica el nombre del contacto que quieres eliminar");
+        contactoAEliminar = sc.nextLine();
+
+        // Sobreescribimos el archivo
+
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(FILE_PATH))) {
+
+            for (int i = 0; i < totalContactos; i++) {
+                if (!contactos[i].getNombre().equalsIgnoreCase(contactoAEliminar)) {
+                    out.write(contactos[i].getNombre() + "," + contactos[i].getTelefono());
+                    out.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Al iniciar el programa, debemos cargar los contactos si teníamos anteriormente algún contacto
      * para cargarlos, obtenemos los datos que están separados por ",", una vez hemos leído esos datos
      * leemos la siguiente línea
