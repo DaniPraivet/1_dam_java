@@ -13,7 +13,8 @@ public class LanzadorAgenda {
             System.out.println("1. Nuevo contacto");
             System.out.println("2. Buscar por nombre");
             System.out.println("3. Mostrar todos");
-            System.out.println("4. Salir");
+            System.out.println("4. Borrar Contactos");
+            System.out.println("0. Salir");
             System.out.print("Elige una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -28,7 +29,11 @@ public class LanzadorAgenda {
                 case 3 -> {
                     agenda.mostrarContactos();
                 }
+
                 case 4 -> {
+                    agenda.borrarContantos(sc);
+                }
+                case 0 -> {
                     agenda.guardarContactos();
                     System.out.println("Agenda guardada. Saliendo...");
                 }
@@ -36,7 +41,7 @@ public class LanzadorAgenda {
                     System.out.println("Opción no válida.");
                 }
             }
-        } while (opcion != 4);
+        } while (opcion != 0);
 
         sc.close();
     }
