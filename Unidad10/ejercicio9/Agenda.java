@@ -19,6 +19,7 @@ public class Agenda {
      * luego le preguntamos al usuario el nombre del nuevo contacto, comprobamos que no
      * se encuentre en ningún contacto de la agenda y luego preguntamos el teléfono, una
      * vez introducido esos datos, creamos un nuevo objeto tipo Contacto.
+     *
      * @param sc El scanner para que podamos pedir datos al usuario
      */
     public void nuevoContacto(Scanner sc) {
@@ -48,6 +49,7 @@ public class Agenda {
      * Le pedimos el nombre que queremos buscar al usuario, luego buscamos al usuario
      * obteniendo el nombre de un contacto, sin importar que sea mayúscula o minúscula
      * y que contenga lo que hemos buscado.
+     *
      * @param sc El scanner para que podamos pedir datos al usuario
      */
     public void buscarContacto(Scanner sc) {
@@ -102,28 +104,31 @@ public class Agenda {
      * Le pedimos al usuario buscar sobre los contactos actuales, le mostramos los resultados
      * para que conozca el nombre exacto a introducir para luego eliminarlo, es decir
      * sobreescribir los datos de la agenda.
+     *
      * @param sc El scanner para que podamos pedir datos al usuario
      */
     public void borrarContantos(Scanner sc) {
         System.out.print("Buscar contacto a eliminar: ");
         String busqueda = sc.nextLine().toLowerCase();
-        boolean Noencontrado = true;
-        String contactoAEliminar = "";
-        if (Noencontrado) {
-            System.out.println("No se encontraron contactos.");
-
-            for (int i = 0; i < this.totalContactos; i++) {
-                if (this.contactos[i].getNombre().toLowerCase().contains(busqueda)) {
-                    System.out.println(this.contactos[i]);
+        String[] grupoEncontrados = new String[this.totalContactos];
+        String contactoAEliminar;
+        int encontrados = 0;
+        for (int i = 0; i < this.totalContactos; i++) {
+            if (this.contactos[i].getNombre().toLowerCase().contains(busqueda)) {
+                grupoEncontrados[encontrados++] = this.contactos[i].getNombre();
+            }
+        }
+        if (encontrados == 0) {
+            System.out.println("No se han encontrado contactos.");
+            return;
+        } else {
+            System.out.println("Se han encontrado " + encontrados + " resultados:");
+            for (String encontrado : grupoEncontrados) {
+                if (encontrado != null) {
+                    System.out.println(encontrado);
                 }
             }
-            if (!Noencontrado) {
-                System.out.println("No se han encontrado contactos.");
-                return;
-            }
-
         }
-
         System.out.println("Indica el nombre del contacto que quieres eliminar");
         contactoAEliminar = sc.nextLine();
 
@@ -147,7 +152,7 @@ public class Agenda {
      * para cargarlos, obtenemos los datos que están separados por ",", una vez hemos leído esos datos
      * leemos la siguiente línea
      */
-    private void cargarContactos() {
+    public void cargarContactos() {
         File archivo = new File(FILE_PATH);
         if (!archivo.exists()) return;
 
