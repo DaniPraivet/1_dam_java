@@ -32,8 +32,11 @@ public class LanzadorAgenda {
 
                 case 4 -> {
                     agenda.borrarContantos(sc);
-                    // Detenemos el programa
-                    opcion = 0;
+                    agenda.guardarContactos();
+                }
+                case 5 -> {
+                    agenda.editarContacto(sc);
+                    agenda.guardarContactos();
                 }
                 case 0 -> {
                     agenda.guardarContactos();

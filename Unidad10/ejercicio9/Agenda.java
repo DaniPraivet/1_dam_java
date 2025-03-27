@@ -148,8 +148,9 @@ public class Agenda {
     }
 
     /**
-     *
-     * @param sc
+     * Pedir al usuario que usuario quiere editar y se le da la opción si quiere editar el
+     * nombre o el teléfono.
+     * @param sc El scanner para que podamos pedir datos al usuario
      */
     public void editarContacto(Scanner sc) {
         System.out.print("Buscar contacto a editar: ");
