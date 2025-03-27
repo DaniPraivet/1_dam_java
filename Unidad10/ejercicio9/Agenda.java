@@ -148,6 +148,72 @@ public class Agenda {
     }
 
     /**
+     *
+     * @param sc
+     */
+    public void editarContacto(Scanner sc) {
+        System.out.print("Buscar contacto a editar: ");
+        String busqueda = sc.nextLine().toLowerCase();
+        Contacto[] grupoEncontrados = new Contacto[this.totalContactos];
+        int encontrados = 0;
+
+        for (int i = 0; i < this.totalContactos; i++) {
+            if (this.contactos[i].getNombre().toLowerCase().contains(busqueda)) {
+                grupoEncontrados[encontrados++] = this.contactos[i];
+            }
+        }
+
+        if (encontrados == 0) {
+            System.out.println("No se han encontrado contactos.");
+            return;
+        }
+
+        System.out.println("Se han encontrado " + encontrados + " resultados:");
+        for (int i = 0; i < encontrados; i++) {
+            System.out.println((i + 1) + ". " + grupoEncontrados[i]);
+        }
+
+        System.out.print("Selecciona el número del contacto que deseas editar: ");
+        int seleccion;
+        try {
+            seleccion = Integer.parseInt(sc.nextLine()) - 1;
+            if (seleccion < 0 || seleccion >= encontrados) {
+                System.out.println("Selección no válida.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada no válida.");
+            return;
+        }
+
+        Contacto contactoAEditar = grupoEncontrados[seleccion];
+
+        System.out.println("¿Qué deseas editar?");
+        System.out.println("1. Nombre");
+        System.out.println("2. Teléfono");
+        System.out.print("Opción: ");
+        String opcion = sc.nextLine();
+
+        switch (opcion) {
+            case "1":
+                System.out.print("Nuevo nombre: ");
+                contactoAEditar.setNombre(sc.nextLine());
+                break;
+            case "2":
+                System.out.print("Nuevo teléfono: ");
+                contactoAEditar.setTelefono(sc.nextLine());
+                break;
+            default:
+                System.out.println("Opción no válida.");
+                return;
+        }
+
+        guardarContactos();
+        System.out.println("Contacto actualizado correctamente.");
+    }
+
+
+    /**
      * Al iniciar el programa, debemos cargar los contactos si teníamos anteriormente algún contacto
      * para cargarlos, obtenemos los datos que están separados por ",", una vez hemos leído esos datos
      * leemos la siguiente línea

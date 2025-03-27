@@ -9,8 +9,8 @@ public class ejercicioClase2 {
         File[] listaDeArchivos = carpeta.listFiles();
         if (listaDeArchivos != null) {
             if (listaDeArchivos.length > 1) {
-                for (File listaDeArchivo : listaDeArchivos) {
-                    System.out.println(listaDeArchivo.getName());
+                for (File archivo : listaDeArchivos) {
+                    System.out.println(archivo.getName());
                 }
             } else {
                 System.out.println("Carpeta vacía.");
