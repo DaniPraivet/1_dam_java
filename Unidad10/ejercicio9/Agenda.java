@@ -72,17 +72,19 @@ public class Agenda {
     /**
      * Mostrar los contactos, ordenándolos por su nombre y luego los mostramos.
      */
-    public void mostrarContactos() {
+    @Override
+    public String toString() {
         if (totalContactos == 0) {
-            System.out.println("No hay contactos en la agenda.");
-            return;
+            return "No hay contactos en la agenda.";
         }
+        String texto = "";
 
         Arrays.sort(contactos, 0, totalContactos, (c1, c2) -> c1.getNombre().compareToIgnoreCase(c2.getNombre()));
 
         for (int i = 0; i < totalContactos; i++) {
-            System.out.println(contactos[i]);
+            texto += "\n" + contactos[i].toString();
         }
+        return texto;
     }
 
     /**

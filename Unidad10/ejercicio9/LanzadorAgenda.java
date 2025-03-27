@@ -28,7 +28,7 @@ public class LanzadorAgenda {
                     agenda.buscarContacto(sc);
                 }
                 case 3 -> {
-                    agenda.mostrarContactos();
+                    System.out.println(agenda);
                 }
 
                 case 4 -> {
