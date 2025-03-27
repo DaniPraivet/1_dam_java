@@ -78,7 +78,7 @@ public class Agenda {
             return "No hay contactos en la agenda.";
         }
         String texto = "";
-
+        // También se puede usar un Comparator<Contacto>, pero he preferido usar Lambda
         Arrays.sort(contactos, 0, totalContactos, (c1, c2) -> c1.getNombre().compareToIgnoreCase(c2.getNombre()));
 
         for (int i = 0; i < totalContactos; i++) {
