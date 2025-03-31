@@ -13,7 +13,7 @@ public class LanzadorAgenda {
             System.out.println("1. Nuevo contacto");
             System.out.println("2. Buscar por nombre");
             System.out.println("3. Mostrar todos");
-            System.out.println("4. Borrar Contacto");
+            System.out.println("4. Borrar contacto");
             System.out.println("5. Editar contacto");
             System.out.println("0. Salir");
             System.out.print("Elige una opción: ");
