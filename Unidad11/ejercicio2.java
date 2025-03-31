@@ -1,9 +1,6 @@
 package Unidad11;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
 public class ejercicio2 implements Serializable {
     public static void main(String[] args) {
@@ -14,9 +11,16 @@ public class ejercicio2 implements Serializable {
                 bajo el sol de nuestra tierra.
                 """;
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Unidad11/archivos/himno.dat"))){
-            out.writeChars(cadena);
+            out.writeObject(cadena);
         } catch (IOException e) {
             System.out.println("Error");
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("Unidad11/archivos/himno.dat"))) {
+            String texto = (String) in.readObject();
+            System.out.println(texto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
