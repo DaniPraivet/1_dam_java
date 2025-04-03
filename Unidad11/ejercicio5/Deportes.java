@@ -25,4 +25,25 @@ public enum Deportes {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        switch (this) {
+            case NATACION -> {
+                return "Natación";
+            }
+            case REMO -> {
+                return "Remo";
+            }
+            case VELA -> {
+                return "Vela";
+            }
+            case WATERPOLO -> {
+                return "Waterpolo";
+            }
+            default -> {
+                return "";
+            }
+        }
+    }
 }
