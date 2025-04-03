@@ -1,7 +1,5 @@
 package Unidad11.ejercicio3;
 
-import Unidad10.ejercicio9.Agenda;
-
 import java.util.Scanner;
 
 public class LanzadorSocios {
