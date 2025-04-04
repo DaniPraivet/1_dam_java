@@ -26,6 +26,26 @@ public enum Deportes {
         }
     }
 
+    public static int getIdDeporte(Deportes deporte) {
+        switch (deporte) {
+            case NATACION -> {
+                return 1;
+            }
+            case REMO -> {
+                return 2;
+            }
+            case VELA -> {
+                return 3;
+            }
+            case WATERPOLO -> {
+                return 4;
+            }
+            default -> {
+                return 0;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         switch (this) {
