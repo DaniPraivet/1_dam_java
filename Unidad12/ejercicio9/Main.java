@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args) {
-        System.out.println("Generar números 20 números aleatorios.");
+        System.out.println("Introduce cualquier número, cuando sea número negativo, terminarás la introducción de números.");
         List<Integer> lista = generarlista();
         mostrarLista(lista);
 
@@ -21,16 +21,15 @@ public class Main{
             if (numero >= 0) {
                 numeros.add(numero);
             }
-        } while (numero < 0);
+        } while (numero >= 0);
         return numeros;
     }
 
     public static void asignarNuevosValores(List<Integer> argsLista) {
-        Iterator<Integer> iterador = argsLista.iterator();
-
-        while (iterador.hasNext()) {
-            if (iterador.next() % 2 == 0) {
-                argsLista.get(iterador.next());
+        for (int i = 0; i < argsLista.size(); i++) {
+            if (argsLista.get(i) % 2 == 0) {
+                System.out.println("Índice " + i + ": " + argsLista.get(i) + " -> " + (argsLista.get(i) * 100));
+                argsLista.set(i, argsLista.get(i) * 100);
             }
         }
     }

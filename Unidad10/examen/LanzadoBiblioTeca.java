@@ -1,7 +1,5 @@
 package Unidad10.examen;
 
-import Unidad11.ejercicio3.Tabla;
-
 import java.util.Scanner;
 
 public class LanzadoBiblioTeca {
