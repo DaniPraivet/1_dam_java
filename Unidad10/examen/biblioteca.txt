@@ -1,0 +1,3 @@
+Hola,Daniel,2012,Programacion
+Hola buenas,Andrés,2015,LDM
+Nose,Smuel,2910,SO
