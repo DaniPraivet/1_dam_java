@@ -9,10 +9,6 @@ public class Main {
         Set<Cliente> clientesPorNombre = new TreeSet<>();
         clientesPorNombre.add(new Cliente("Dani",19));
         clientesPorNombre.add(new Cliente("Andrés",20));
-        clientesPorNombre.add(new Cliente("Álvaro",18));
-        clientesPorNombre.add(new Cliente("Alexis",18));
-        clientesPorNombre.add(new Cliente("Samu",19));
-        clientesPorNombre.add(new Cliente("Miguel",18));
         clientesPorNombre.add(new Cliente("Javi",18));
 
         System.out.println("Clientes ordenados por nombre (TreeSet)");
@@ -22,7 +18,7 @@ public class Main {
         Set<Cliente> clientesPorEdad = new TreeSet<>(Comparator.comparingInt(Cliente::getEdad));
         clientesPorEdad.addAll(clientesPorNombre);
 
-        System.out.println("Clientes ordenados por edad (TreeSet con Comparator)");
+        System.out.println("\nClientes ordenados por edad (TreeSet con Comparator)");
         clientesPorEdad.forEach(System.out::println);
     }
 }
