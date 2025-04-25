@@ -13,21 +13,21 @@ public class Main {
         System.out.println("Lista sin repetir");
         mostrarLista(sinRepetir);
 
-        HashSet<Integer> repetidos = new HashSet<>();
+        Set<Integer> repetidos = new HashSet<>();
+        Set<Integer> vistos = new HashSet<>();
+
         for (Integer num : lista) {
-            if (!sinRepetir.add(num)) {
+            if (!vistos.add(num)) {
                 repetidos.add(num);
             }
         }
         System.out.println("Lista repetidos");
         mostrarLista(repetidos);
 
-        HashSet<Integer> elementosUnicos = new HashSet<>(lista);
-        repetidos.removeAll(sinRepetir);
-
-        System.out.println("Lista unicos");
-        mostrarLista(elementosUnicos);
-
+        Set<Integer> unicos = new HashSet<>(sinRepetir);
+        unicos.removeAll(repetidos);
+        System.out.println("Lista únicos");
+        mostrarLista(unicos);
 
     }
     public static Collection<Integer> generarLista(int cantidad, int limite) {
