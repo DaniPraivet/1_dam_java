@@ -13,14 +13,7 @@ public class Main {
         System.out.println("Lista sin repetir");
         mostrarLista(sinRepetir);
 
-        Set<Integer> repetidos = new HashSet<>();
-        Set<Integer> vistos = new HashSet<>();
-
-        for (Integer num : lista) {
-            if (!vistos.add(num)) {
-                repetidos.add(num);
-            }
-        }
+        Set<Integer> repetidos = generarListaRepetidos(lista);
         System.out.println("Lista repetidos");
         mostrarLista(repetidos);
 
@@ -41,5 +34,17 @@ public class Main {
     public static void mostrarLista(Collection<Integer> argsLista) {
         System.out.println("\tLista actual: \n\t\t" + argsLista);
         System.out.println("\tTamaño de la lista actualmente: " + argsLista.size() + "\n\n");
+    }
+
+    public static Set<Integer> generarListaRepetidos(Collection<Integer> argsLista) {
+        Set<Integer> repetidos = new HashSet<>();
+        Set<Integer> vistos = new HashSet<>();
+
+        for (Integer num : argsLista) {
+            if (!vistos.add(num)) {
+                repetidos.add(num);
+            }
+        }
+        return repetidos;
     }
 }
