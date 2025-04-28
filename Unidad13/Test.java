@@ -1,27 +1,33 @@
 package Unidad13;
 
 import java.sql.*;
-import java.util.Properties;
-import java.util.logging.Logger;
 
-public class Test{
+public class Test {
     public static void main(String[] args) {
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexionDB = DriverManager.getConnection("jdbc:mysql://172.26.12.94:3306/tienda","dani","usuario");
+            Connection conexionDB = DriverManager.getConnection("jdbc:mysql://localhost:3306/tienda_informatica?serverTimezone=UTC", "root", "Da1415290306#");
+
             Statement informeConsultaEmpleados = conexionDB.createStatement();
             ResultSet conjuntoDeResultados = informeConsultaEmpleados.executeQuery("SELECT * FROM producto;");
+
             while (conjuntoDeResultados.next()) {
-                System.out.println(conjuntoDeResultados);
+                int codigo = conjuntoDeResultados.getInt("codigo");
+                String nombre = conjuntoDeResultados.getString("nombre");
+                double precio = conjuntoDeResultados.getDouble("precio");
+                int codigoFabricante = conjuntoDeResultados.getInt("codigo_fabricante");
+
+                System.out.println("Código: " + codigo + ", Nombre: " + nombre + ", Precio: " + precio + ", Código Fabricante: " + codigoFabricante);
             }
+
             conjuntoDeResultados.close();
             informeConsultaEmpleados.close();
             conexionDB.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("Error de SQL: " + e.getMessage());
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error cargando el driver: " + e.getMessage());
         }
     }
 }
