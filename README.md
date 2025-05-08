@@ -13,6 +13,7 @@ Ejercicios hechos en clase durante el primer año de Desarrollo de Aplicaciones 
 `UNIDAD 10` -> Ficheros de texto <br>
 `UNIDAD 11` -> Ficheros binarios <br>
 `UNIDAD 12` -> Colecciones <br>
+`UNIDAD 13` -> Bases de datos <br>
 
 ### ING/ENG
 Exercises done in class during the first year of Cross-platform Application Development
@@ -27,4 +28,4 @@ Exercises done in class during the first year of Cross-platform Application Deve
 `UNIDAD 9` -> Interfaces <br>
 `UNIDAD 10` -> Text files <br>
 `UNIDAD 11` -> Binary files <br>
-`UNIDAD 12` -> Collections <br>
+`UNIDAD 12` -> Databases <br>
