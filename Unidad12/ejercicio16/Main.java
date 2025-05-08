@@ -4,9 +4,9 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static final Scanner scanner = new Scanner(System.in);
-    static final String NOMBRE_FICHERO = "productos.dat";
-    static Map<String, Integer> productos = new HashMap<>();
+    static Scanner sc = new Scanner(System.in);
+    static final String NOMBRE_FICHERO = "./Unidad12/ejercicio16/productos.dat";
+    static Map<String, String> productos = new HashMap<>();
 
     public static void main(String[] args) {
         cargarDesdeFichero();
@@ -21,7 +21,7 @@ public class Main {
             System.out.println("5. Salir y guardar");
 
             System.out.print("Elige una opción: ");
-            String opcion = scanner.nextLine();
+            String opcion = sc.nextLine();
 
             switch (opcion) {
                 case "1" -> darDeAlta();
@@ -39,26 +39,24 @@ public class Main {
 
     private static void darDeAlta() {
         System.out.print("Introduce código del producto: ");
-        String codigo = scanner.nextLine();
+        String codigo = sc.nextLine();
 
         if (productos.containsKey(codigo)) {
             System.out.println("Ya existe un producto con ese código.");
             return;
         }
 
-        System.out.print("Introduce número de unidades: ");
-        try {
-            int unidades = Integer.parseInt(scanner.nextLine());
-            productos.put(codigo, unidades);
-            System.out.println("Producto dado de alta.");
-        } catch (NumberFormatException e) {
-            System.out.println("Número de unidades inválido.");
-        }
+        System.out.print("Introduce el nombre del producto: ");
+        String nombreProducto = sc.nextLine();
+
+        productos.put(codigo, nombreProducto);
+        System.out.println("Producto dado de alta.");
+
     }
 
     private static void darDeBaja() {
         System.out.print("Introduce código del producto a eliminar: ");
-        String codigo = scanner.nextLine();
+        String codigo = sc.nextLine();
 
         if (productos.remove(codigo) != null) {
             System.out.println("Producto eliminado.");
@@ -69,17 +67,17 @@ public class Main {
 
     private static void actualizarStock() {
         System.out.print("Introduce código del producto: ");
-        String codigo = scanner.nextLine();
+        String codigo = sc.nextLine();
 
         if (!productos.containsKey(codigo)) {
             System.out.println("Producto no encontrado.");
             return;
         }
 
-        System.out.print("Introduce nuevo número de unidades: ");
+        System.out.print("Introduce nuevo nombre del producto: ");
         try {
-            int unidades = Integer.parseInt(scanner.nextLine());
-            productos.put(codigo, unidades);
+            String nombreProducto = sc.nextLine();
+            productos.put(codigo, nombreProducto);
             System.out.println("Stock actualizado.");
         } catch (NumberFormatException e) {
             System.out.println("Número inválido.");
@@ -91,8 +89,8 @@ public class Main {
             System.out.println("No hay productos registrados.");
         } else {
             System.out.println("\n--- Lista de productos ---");
-            productos.forEach((codigo, stock) ->
-                    System.out.println("Código: " + codigo + " - Stock: " + stock + " unidades"));
+            productos.forEach((codigo, nombreProducto) ->
+                    System.out.println("Código: " + codigo + " - Nombre producto: " + nombreProducto));
         }
     }
 
@@ -110,7 +108,7 @@ public class Main {
         if (!fichero.exists()) return;
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichero))) {
-            productos = (Map<String, Integer>) ois.readObject();
+            productos = (Map<String, String>) ois.readObject();
             System.out.println("Datos cargados correctamente.");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error al cargar datos previos: " + e.getMessage());
