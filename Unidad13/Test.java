@@ -6,8 +6,8 @@ public class Test {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-//
-            Connection conexionDB = DriverManager.getConnection("jdbc:mysql://localhost:3306/tienda_informatica?serverTimezone=UTC", "root", "Da1415290306#");
+
+            Connection conexionDB = DriverManager.getConnection("jdbc:mysql://localhost:3306/instituto?serverTimezone=UTC", "admin_rodriguez", "admin123");
 
             Statement informeConsultaEmpleados = conexionDB.createStatement();
             ResultSet conjuntoDeResultados = informeConsultaEmpleados.executeQuery("SELECT * FROM producto;");
