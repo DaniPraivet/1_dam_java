@@ -2,20 +2,23 @@ package Unidad13.instituto.ControladorBBDD;
 
 import Unidad13.instituto.Alumno;
 import Unidad13.instituto.Asignatura;
+import Unidad13.instituto.Matricula;
 import Unidad13.instituto.Modelo.ConexionDAOInstituto;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class ControladorAlumnos {
+public class Controlador {
     Map<Integer, Alumno> alumnos;
     List<Asignatura> asignaturas;
+    List<Matricula> matriculas;
 
 
-    public ControladorAlumnos() {
+    public Controlador() {
         alumnos = ConexionDAOInstituto.obtenerAlumnos();
         asignaturas = ConexionDAOInstituto.obtenerAsignaturas();
+        matriculas = ConexionDAOInstituto.obtenerMatriculas();
     }
 
     public Map<Integer, Alumno> getAlumnos() {
@@ -40,6 +43,7 @@ public class ControladorAlumnos {
         return ConexionDAOInstituto.insertarAsignatura(a);
     }
 
+
     public void mostrarAlumnosPorNombre() {
         alumnos.entrySet()
                 .stream()
@@ -52,5 +56,12 @@ public class ControladorAlumnos {
         for (Asignatura a : asignaturas) {
             System.out.println(a);
         }
+    }
+    public int ultimoIdAsignaturas() {
+        return asignaturas.size();
+    }
+
+    public List<Matricula> getMatriculasAlumno(int idAlumno) {
+        return ConexionDAOInstituto.matriculasPorAlumno(idAlumno);
     }
 }

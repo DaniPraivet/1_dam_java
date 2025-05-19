@@ -2,6 +2,7 @@ package Unidad13.instituto.Modelo;
 
 import Unidad13.instituto.Alumno;
 import Unidad13.instituto.Asignatura;
+import Unidad13.instituto.Matricula;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class ConexionDAOInstituto {
     private static final String PASSWORD = "usuario";
     public static Map<Integer, Alumno> alumnos = new TreeMap<>();
     public static List<Asignatura> asignaturas = new ArrayList<>();
+    public static List<Matricula> matriculas = new ArrayList<>();
+
     public static Map<Integer,Alumno> obtenerAlumnos() {
         try (Connection conexionBD = conectarseBD();
              Statement informe = conexionBD.createStatement();
@@ -53,6 +56,44 @@ public class ConexionDAOInstituto {
         return asignaturas;
     }
 
+    public static List<Matricula> obtenerMatriculas() {
+        try (Connection conexionBD = conectarseBD();
+             Statement informe = conexionBD.createStatement();
+             ResultSet conjuntoResultados = informe.executeQuery("SELECT * FROM matricula;")) {
+            while (conjuntoResultados.next()) {
+                int idMatricula = conjuntoResultados.getInt("id");
+                Alumno alumno = obtenerAlumnoPorId(conjuntoResultados.getInt("id_alumno"));
+                Asignatura asignatura = obtenerAsignatura(conjuntoResultados.getInt("id_asignatura"));
+                double nota = conjuntoResultados.getDouble("nota");
+                Matricula m = new Matricula(idMatricula,alumno,asignatura,nota);
+                matriculas.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return matriculas;
+    }
+
+    private static Alumno obtenerAlumnoPorId(int idAlumno) {
+        for (Map.Entry<Integer, Alumno> a : alumnos.entrySet()) {
+            if (a.getKey().equals(idAlumno)) {
+                return a.getValue();
+            }
+        }
+        return null;
+    }
+
+    private static Asignatura obtenerAsignatura(int idAsignatura) {
+        for (Asignatura a : asignaturas) {
+            if (a.getId() == idAsignatura) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+
     public static boolean insertarAlumno(Alumno a) {
         boolean resultado = false;
         String consulta = "INSER INTO alumnos (nombre, direccion, estado_matricula, carnet_conducir) " +
@@ -87,5 +128,30 @@ public class ConexionDAOInstituto {
 
     public static Connection conectarseBD() throws SQLException {
         return DriverManager.getConnection(URL,USER,PASSWORD);
+    }
+
+    public static List<Matricula> matriculasPorAlumno(int idAlumno) {
+        List<Matricula> listaMatriculasAlumno = new ArrayList<>();
+        try (Connection conexionBD = conectarseBD();
+             Statement informe = conexionBD.createStatement();
+             ResultSet conjuntoResultados = informe.executeQuery("SELECT id FROM matricula WHERE id_alumno=" + ";")) {
+            while (conjuntoResultados.next()) {
+                int idMatricula = conjuntoResultados.getInt("id");
+                Matricula m = obtenerMatriculaPorId(idMatricula);
+                listaMatriculasAlumno.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listaMatriculasAlumno;
+    }
+
+    private static Matricula obtenerMatriculaPorId(int idMatricula) {
+        for (Matricula m : matriculas) {
+            if (m.getId()==idMatricula) {
+                return m;
+            }
+        }
+        return null;
     }
 }
