@@ -7,8 +7,6 @@ import Unidad13.instituto.Matricula;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class ConexionDAOInstituto {
     private static final String URL = "jdbc:mysql://localhost:3306/instituto";
@@ -76,14 +74,14 @@ public class ConexionDAOInstituto {
         return matriculas;
     }
 
-    private static Alumno obtenerAlumnoPorId(int idAlumno) {
+    public static Alumno obtenerAlumnoPorId(int idAlumno) {
         for (Alumno a : alumnos) {
             if (a.getId()==idAlumno) return a;
         }
         return null;
     }
 
-    private static Asignatura obtenerAsignatura(int idAsignatura) {
+    public static Asignatura obtenerAsignatura(int idAsignatura) {
         for (Asignatura a : asignaturas) {
             if (a.getId() == idAsignatura) {
                 return a;
@@ -106,7 +104,7 @@ public class ConexionDAOInstituto {
             if (filas > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()) {
-                    a.setId(rs.getInt(1)); // asignamos el ID generado al objeto Alumno
+                    a.setId(rs.getInt(1));
                 }
                 resultado = true;
             }
@@ -180,7 +178,7 @@ public class ConexionDAOInstituto {
         return lista;
     }
 
-    private static Matricula obtenerMatriculaPorId(int idMatricula) {
+    public static Matricula obtenerMatriculaPorId(int idMatricula) {
         for (Matricula m : matriculas) {
             if (m.getId()==idMatricula) {
                 return m;

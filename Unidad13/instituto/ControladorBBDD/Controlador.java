@@ -7,13 +7,8 @@ import Unidad13.instituto.Modelo.ConexionDAOInstituto;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 public class Controlador {
-
-    public Controlador() {
-        // No caches listas aquí
-    }
 
     // ALUMNOS
     public List<Alumno> obtenerAlumnos() {
@@ -28,6 +23,9 @@ public class Controlador {
         List<Alumno> alumnos = obtenerAlumnos();
         alumnos.sort(Comparator.comparing(Alumno::getNombre, String.CASE_INSENSITIVE_ORDER));
         alumnos.forEach(System.out::println);
+    }
+    public Alumno obtenerAlumnoPorId(int idAlumno) {
+        return ConexionDAOInstituto.obtenerAlumnoPorId(idAlumno);
     }
 
     // ASIGNATURAS
@@ -51,6 +49,9 @@ public class Controlador {
         // Suponiendo que la asignatura con mayor id tiene el último id
         return asignaturas.stream().mapToInt(Asignatura::getId).max().orElse(0);
     }
+    public Asignatura obtenerAsignaturaPorId(int idAsignatura) {
+        return ConexionDAOInstituto.obtenerAsignatura(idAsignatura);
+    }
 
     // MATRICULAS
     public List<Matricula> obtenerMatriculasPorAlumno(int idAlumno) {
@@ -69,5 +70,4 @@ public class Controlador {
         return ConexionDAOInstituto.eliminarMatricula(idAlumno, idAsignatura);
     }
 
-    // Aquí puedes añadir más métodos para calcular notas medias, máximas, mínimas, etc.
 }
