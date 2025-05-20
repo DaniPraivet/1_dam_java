@@ -1,16 +1,26 @@
 package Unidad13.instituto;
 
 public class Alumno {
+    int id;
     String nombre;
     String direccion;
     String estadoMatricula;
     boolean carnetConducir;
 
-    public Alumno(String nombre, String direccion, String estadoMatricula, int carnetConducir) {
+    public Alumno(int id, String nombre, String direccion, String estadoMatricula, int carnetConducir) {
+        this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.estadoMatricula = estadoMatricula;
-        this.carnetConducir=(carnetConducir==1);
+        this.carnetConducir = (carnetConducir == 1);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -47,6 +57,6 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return nombre + " - " + direccion + " - " + estadoMatricula + " - " + carnetConducir;
+        return id + " - " + nombre + " - " + direccion + " - " + estadoMatricula + " - " + (carnetConducir ? "Sí" : "No");
     }
 }

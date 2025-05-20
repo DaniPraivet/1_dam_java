@@ -4,6 +4,8 @@ import Unidad13.instituto.Alumno;
 import Unidad13.instituto.Asignatura;
 import Unidad13.instituto.ControladorBBDD.Controlador;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -47,7 +49,9 @@ public class Main {
                 agregarAsignatura(controlador);
             }
             case "5" -> {
-                controlador.getMatriculasAlumno();
+                System.out.print("Introduce el ID del alumno: ");
+                int idAlumno = Integer.parseInt(sc.nextLine());
+                controlador.getMatriculasAlumno(idAlumno);
             }
             case "6" -> {
                 controlador.obtenerPromedioNotasAlumno();
@@ -83,7 +87,7 @@ public class Main {
         } else {
             carnetConducir = 0;
         }
-        boolean alumnoAgregadoCorrectamente = controlador.agregarAlumno(new Alumno(nombreAlumno,direccionAlumno,matriculaAlumno,carnetConducir));
+        boolean alumnoAgregadoCorrectamente = controlador.agregarAlumno(new Alumno(controlador.ultimoIdAsignaturas(), nombreAlumno,direccionAlumno,matriculaAlumno,carnetConducir));
 
         if (alumnoAgregadoCorrectamente) {
             System.out.println("Alumno agregado correctamente");
@@ -102,6 +106,100 @@ public class Main {
             System.out.println("Alumno agregado correctamente");
         } else {
             System.out.println("Hubo un problema intentando agregar el alumno a la BBDD");
+        }
+    }
+    public void eliminarMatriculaAlumno() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("ID alumno: ");
+        int idAlumno = sc.nextInt();
+        System.out.print("ID asignatura: ");
+        int idAsignatura = sc.nextInt();
+
+        boolean exito = eliminarMatricula(idAlumno, idAsignatura);
+        if (exito) {
+            System.out.println("Matrícula eliminada correctamente.");
+        } else {
+            System.out.println("No se pudo eliminar la matrícula.");
+        }
+    }
+    public void matricularAlumnoYAsignarNota() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("ID alumno: ");
+        int idAlumno = sc.nextInt();
+        System.out.print("ID asignatura: ");
+        int idAsignatura = sc.nextInt();
+        System.out.print("Nota: ");
+        double nota = sc.nextDouble();
+
+        Alumno alumno = obtenerAlumnoPorId(idAlumno);
+        Asignatura asignatura = obtenerAsignaturaPorId(idAsignatura);
+        if (alumno == null || asignatura == null) {
+            System.out.println("Alumno o asignatura no encontrados.");
+            return;
+        }
+        Matricula matricula = new Matricula(0, alumno, asignatura, nota); // 0 para id, se puede gestionar automáticamente en BBDD
+
+        boolean exito = insertarMatricula(matricula);
+        if (exito) {
+            System.out.println("Matrícula creada correctamente.");
+        } else {
+            System.out.println("Error al crear la matrícula.");
+        }
+    }
+    public void obtenerPromedioNotasAsignatura() {
+        System.out.print("Introduce ID de la asignatura: ");
+        int idAsignatura = new Scanner(System.in).nextInt();
+        List<Matricula> matriculas = obtenerMatriculasPorAsignatura(idAsignatura);
+        if (matriculas.isEmpty()) {
+            System.out.println("No hay matrículas para esta asignatura.");
+            return;
+        }
+        double sumaNotas = 0;
+        for (Matricula m : matriculas) {
+            sumaNotas += m.getNota();
+        }
+        double media = sumaNotas / matriculas.size();
+        System.out.printf("La nota media de la asignatura %s es %.2f\n", matriculas.get(0).getAsignatura().getNombre(), media);
+    }
+    public void obtenerPromedioNotasAlumno() {
+        System.out.print("Introduce ID del alumno: ");
+        int idAlumno = new Scanner(System.in).nextInt();
+        List<Matricula> matriculas = obtenerMatriculasPorAlumno(idAlumno);
+        if (matriculas.isEmpty()) {
+            System.out.println("El alumno no tiene matrículas.");
+            return;
+        }
+        double sumaNotas = 0;
+        for (Matricula m : matriculas) {
+            sumaNotas += m.getNota();
+        }
+        double media = sumaNotas / matriculas.size();
+        System.out.printf("La nota media del alumno %s es %.2f\n", matriculas.get(0).getAlumno().getNombre(), media);
+    }
+    public void getMatriculasAlumno(int idAlumno) {
+        List<Matricula> matriculas = obtenerMatriculasPorAlumno(idAlumno);
+        if (matriculas.isEmpty()) {
+            System.out.println("El alumno no tiene matrículas.");
+            return;
+        }
+        System.out.println("Matrículas del alumno " + matriculas.get(0).getAlumno().getNombre() + ":");
+        for (Matricula m : matriculas) {
+            System.out.printf("Asignatura: %s, Nota: %.2f\n", m.getAsignatura().getNombre(), m.getNota());
+        }
+    }
+    public void mostrarAsignaturas() {
+        List<Asignatura> asignaturas = obtenerAsignaturas(); // método que devuelve lista de asignaturas
+        System.out.println("=== Listado de asignaturas ===");
+        for (Asignatura asig : asignaturas) {
+            System.out.println(asig);
+        }
+    }
+    public void mostrarAlumnosPorNombre() {
+        List<Alumno> listaAlumnos = obtenerAlumnos(); // Método que devuelve la lista de alumnos (de la BBDD o en memoria)
+        listaAlumnos.sort(Comparator.comparing(Alumno::getNombre));
+        System.out.println("=== Alumnos por orden alfabético ===");
+        for (Alumno a : listaAlumnos) {
+            System.out.println(a);
         }
     }
 }

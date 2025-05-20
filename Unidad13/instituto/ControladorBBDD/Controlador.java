@@ -10,58 +10,64 @@ import java.util.List;
 import java.util.Map;
 
 public class Controlador {
-    Map<Integer, Alumno> alumnos;
-    List<Asignatura> asignaturas;
-    List<Matricula> matriculas;
-
 
     public Controlador() {
-        alumnos = ConexionDAOInstituto.obtenerAlumnos();
-        asignaturas = ConexionDAOInstituto.obtenerAsignaturas();
-        matriculas = ConexionDAOInstituto.obtenerMatriculas();
+        // No caches listas aquí
     }
 
-    public Map<Integer, Alumno> getAlumnos() {
-        return alumnos;
-    }
-
-    public void setAlumnos(Map<Integer, Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }
-
-    public void mostrarAlumnos() {
-        for (Map.Entry<Integer,Alumno> a : alumnos.entrySet()) {
-            System.out.println(a.getKey() + " - " + a.getValue());
-        }
+    // ALUMNOS
+    public List<Alumno> obtenerAlumnos() {
+        return ConexionDAOInstituto.obtenerAlumnos();
     }
 
     public boolean agregarAlumno(Alumno a) {
         return ConexionDAOInstituto.insertarAlumno(a);
     }
 
-    public boolean agregarAsignatura(Asignatura a){
+    public void mostrarAlumnosPorNombre() {
+        List<Alumno> alumnos = obtenerAlumnos();
+        alumnos.sort(Comparator.comparing(Alumno::getNombre, String.CASE_INSENSITIVE_ORDER));
+        alumnos.forEach(System.out::println);
+    }
+
+    // ASIGNATURAS
+    public List<Asignatura> obtenerAsignaturas() {
+        return ConexionDAOInstituto.obtenerAsignaturas();
+    }
+
+    public boolean agregarAsignatura(Asignatura a) {
         return ConexionDAOInstituto.insertarAsignatura(a);
     }
 
-
-    public void mostrarAlumnosPorNombre() {
-        alumnos.entrySet()
-                .stream()
-                .sorted(Comparator.comparing(a -> a.getValue().getNombre(), String.CASE_INSENSITIVE_ORDER))
-                .forEach(a -> System.out.println(a.getKey() + " - " + a.getValue()));
-    }
     public void mostrarAsignaturas() {
-        System.out.println("Lista de asignaturas: ");
-        asignaturas.sort(Comparator.comparing(Asignatura::getCurso, Integer::compareTo));
-        for (Asignatura a : asignaturas) {
-            System.out.println(a);
-        }
-    }
-    public int ultimoIdAsignaturas() {
-        return asignaturas.size();
+        List<Asignatura> asignaturas = obtenerAsignaturas();
+        asignaturas.sort(Comparator.comparing(Asignatura::getCurso));
+        asignaturas.forEach(System.out::println);
     }
 
-    public List<Matricula> getMatriculasAlumno(int idAlumno) {
-        return ConexionDAOInstituto.matriculasPorAlumno(idAlumno);
+    public int ultimoIdAsignaturas() {
+        List<Asignatura> asignaturas = obtenerAsignaturas();
+        if (asignaturas.isEmpty()) return 0;
+        // Suponiendo que la asignatura con mayor id tiene el último id
+        return asignaturas.stream().mapToInt(Asignatura::getId).max().orElse(0);
     }
+
+    // MATRICULAS
+    public List<Matricula> obtenerMatriculasPorAlumno(int idAlumno) {
+        return ConexionDAOInstituto.obtenerMatriculasPorAlumno(idAlumno);
+    }
+
+    public List<Matricula> obtenerMatriculasPorAsignatura(int idAsignatura) {
+        return ConexionDAOInstituto.obtenerMatriculasPorAsignatura(idAsignatura);
+    }
+
+    public boolean insertarMatricula(Matricula m) {
+        return ConexionDAOInstituto.insertarMatricula(m);
+    }
+
+    public boolean eliminarMatricula(int idAlumno, int idAsignatura) {
+        return ConexionDAOInstituto.eliminarMatricula(idAlumno, idAsignatura);
+    }
+
+    // Aquí puedes añadir más métodos para calcular notas medias, máximas, mínimas, etc.
 }
