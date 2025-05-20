@@ -203,13 +203,6 @@ public class Main {
             System.out.println(asig);
         }
     }
-    private static void mostrarAlumnosPorNombre() {
-        alumnos.sort(Comparator.comparing(Alumno::getNombre));
-        System.out.println("=== Alumnos por orden alfabético ===");
-        for (Alumno a : alumnos) {
-            System.out.println(a);
-        }
-    }
 }
 
 
