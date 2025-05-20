@@ -11,17 +11,22 @@ import java.util.Scanner;
 
 public class Main {
 
-    static Scanner sc = new Scanner(System.in);
-    static boolean ejecucion = true;
+    private static List<Alumno> alumnos;
+    private static List<Asignatura> asignaturas;
+
+    private static Scanner sc = new Scanner(System.in);
+    private static boolean ejecucion = true;
+
     public static void main(String[] args) {
         String opcion;
         Controlador controlador = new Controlador();
+        alumnos = controlador.obtenerAlumnos();
+        asignaturas = controlador.obtenerAsignaturas();
         while (ejecucion) {
             mostrarMenu();
             opcion = sc.nextLine();
             ejecucion = gestionarOpciones(opcion,controlador);
         }
-
     }
 
     static void mostrarMenu() {
@@ -44,7 +49,7 @@ public class Main {
                 agregarAlumno(controlador);
             }
             case "3" -> {
-                controlador.mostrarAsignaturas();
+                mostrarAsignaturas();
             }
             case "4" -> {
                 agregarAsignatura(controlador);
@@ -55,16 +60,20 @@ public class Main {
                 getMatriculasAlumno(controlador,idAlumno);
             }
             case "6" -> {
-                obtenerPromedioNotasAlumno(controlador);
+                obtenerPromedioNotasAsignatura(controlador);
             }
             case "7" -> {
-                obtenerPromedioNotasAsignatura(controlador);
+                obtenerPromedioNotasAlumno(controlador);
             }
             case "8" -> {
                 matricularAlumnoYAsignarNota(controlador);
             }
             case "9" -> {
                 eliminarMatriculaAlumno(controlador);
+            }
+            case "0" -> {
+                System.out.println("Gracias por usar el programa.");
+                ejecucion=false;
             }
             default -> {
                 System.out.println("Opción inválida.");
@@ -109,7 +118,7 @@ public class Main {
             System.out.println("Hubo un problema intentando agregar el alumno a la BBDD");
         }
     }
-    public static void eliminarMatriculaAlumno(Controlador controlador) {
+    private static void eliminarMatriculaAlumno(Controlador controlador) {
         Scanner sc = new Scanner(System.in);
         System.out.print("ID alumno: ");
         int idAlumno = sc.nextInt();
@@ -123,7 +132,7 @@ public class Main {
             System.out.println("No se pudo eliminar la matrícula.");
         }
     }
-    public static void matricularAlumnoYAsignarNota(Controlador controlador) {
+    private static void matricularAlumnoYAsignarNota(Controlador controlador) {
         Scanner sc = new Scanner(System.in);
         System.out.print("ID alumno: ");
         int idAlumno = sc.nextInt();
@@ -147,7 +156,7 @@ public class Main {
             System.out.println("Error al crear la matrícula.");
         }
     }
-    public static void obtenerPromedioNotasAsignatura(Controlador controlador) {
+    private static void obtenerPromedioNotasAsignatura(Controlador controlador) {
         System.out.print("Introduce ID de la asignatura: ");
         int idAsignatura = new Scanner(System.in).nextInt();
         List<Matricula> matriculas = controlador.obtenerMatriculasPorAsignatura(idAsignatura);
@@ -162,7 +171,7 @@ public class Main {
         double media = sumaNotas / matriculas.size();
         System.out.printf("La nota media de la asignatura %s es %.2f\n", matriculas.get(0).getAsignatura().getNombre(), media);
     }
-    public static void obtenerPromedioNotasAlumno(Controlador controlador) {
+    private static void obtenerPromedioNotasAlumno(Controlador controlador) {
         System.out.print("Introduce ID del alumno: ");
         int idAlumno = new Scanner(System.in).nextInt();
         List<Matricula> matriculas = controlador.obtenerMatriculasPorAlumno(idAlumno);
@@ -177,7 +186,7 @@ public class Main {
         double media = sumaNotas / matriculas.size();
         System.out.printf("La nota media del alumno %s es %.2f\n", matriculas.get(0).getAlumno().getNombre(), media);
     }
-    public static void getMatriculasAlumno(Controlador controlador, int idAlumno) {
+    private static void getMatriculasAlumno(Controlador controlador, int idAlumno) {
         List<Matricula> matriculas = controlador.obtenerMatriculasPorAlumno(idAlumno);
         if (matriculas.isEmpty()) {
             System.out.println("El alumno no tiene matrículas.");
@@ -188,18 +197,16 @@ public class Main {
             System.out.printf("Asignatura: %s, Nota: %.2f\n", m.getAsignatura().getNombre(), m.getNota());
         }
     }
-    public void mostrarAsignaturas(Controlador controlador) {
-        List<Asignatura> asignaturas = controlador.obtenerAsignaturas();
+    private static void mostrarAsignaturas() {
         System.out.println("=== Listado de asignaturas ===");
         for (Asignatura asig : asignaturas) {
             System.out.println(asig);
         }
     }
-    public void mostrarAlumnosPorNombre(Controlador controlador) {
-        List<Alumno> listaAlumnos = controlador.obtenerAlumnos();
-        listaAlumnos.sort(Comparator.comparing(Alumno::getNombre));
+    private static void mostrarAlumnosPorNombre() {
+        alumnos.sort(Comparator.comparing(Alumno::getNombre));
         System.out.println("=== Alumnos por orden alfabético ===");
-        for (Alumno a : listaAlumnos) {
+        for (Alumno a : alumnos) {
             System.out.println(a);
         }
     }

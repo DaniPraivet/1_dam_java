@@ -40,7 +40,7 @@ public class ConexionDAOInstituto {
     public static List<Asignatura> obtenerAsignaturas() {
         try (Connection conexionBD = conectarseBD();
              Statement informe = conexionBD.createStatement();
-             ResultSet conjuntoResultados = informe.executeQuery("SELECT * FROM asignaturas ORDER BY nombre;")) {
+             ResultSet conjuntoResultados = informe.executeQuery("SELECT * FROM asignaturas;")) {
             while (conjuntoResultados.next()) {
                 int idAsignatura = conjuntoResultados.getInt("id");
                 String nombre = conjuntoResultados.getString("nombre");

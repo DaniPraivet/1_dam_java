@@ -39,8 +39,9 @@ public class Controlador {
 
     public void mostrarAsignaturas() {
         List<Asignatura> asignaturas = obtenerAsignaturas();
-        asignaturas.sort(Comparator.comparing(Asignatura::getCurso));
-        asignaturas.forEach(System.out::println);
+        for (Asignatura a : asignaturas) {
+            System.out.println(a);
+        }
     }
 
     public int ultimoIdAsignaturas() {
