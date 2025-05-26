@@ -37,13 +37,6 @@ public class Controlador {
         return ConexionDAOInstituto.insertarAsignatura(a);
     }
 
-    public void mostrarAsignaturas() {
-        List<Asignatura> asignaturas = obtenerAsignaturas();
-        for (Asignatura a : asignaturas) {
-            System.out.println(a);
-        }
-    }
-
     public int ultimoIdAsignaturas() {
         List<Asignatura> asignaturas = obtenerAsignaturas();
         if (asignaturas.isEmpty()) return 0;

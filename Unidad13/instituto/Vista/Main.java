@@ -5,13 +5,11 @@ import Unidad13.instituto.Asignatura;
 import Unidad13.instituto.ControladorBBDD.Controlador;
 import Unidad13.instituto.Matricula;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    private static List<Alumno> alumnos;
     private static List<Asignatura> asignaturas;
 
     private static Scanner sc = new Scanner(System.in);
@@ -20,7 +18,6 @@ public class Main {
     public static void main(String[] args) {
         String opcion;
         Controlador controlador = new Controlador();
-        alumnos = controlador.obtenerAlumnos();
         asignaturas = controlador.obtenerAsignaturas();
         while (ejecucion) {
             mostrarMenu();
@@ -113,9 +110,9 @@ public class Main {
         boolean asignaturaAgregadaCorrectamente = controlador.agregarAsignatura(new Asignatura(controlador.ultimoIdAsignaturas()+1, nombreAsignatura,anyoCurso));
 
         if (asignaturaAgregadaCorrectamente) {
-            System.out.println("Alumno agregado correctamente");
+            System.out.println("Asignatura agregada correctamente");
         } else {
-            System.out.println("Hubo un problema intentando agregar el alumno a la BBDD");
+            System.out.println("Hubo un problema intentando agregar la asignatura a la BBDD");
         }
     }
     private static void eliminarMatriculaAlumno(Controlador controlador) {
